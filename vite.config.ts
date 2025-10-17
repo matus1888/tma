@@ -5,8 +5,11 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), basicSsl()],
-  build: { 
-outDir: "./dics"
+  build: {
+    outDir: "./docs"
+  },
+  server: {
+    open: true,
   },
   base: "./"
 })
