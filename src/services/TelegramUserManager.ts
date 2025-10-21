@@ -45,7 +45,7 @@ export class TelegramUserManager {
         window.Telegram!.WebApp.ready();
       }
     } catch (error) {
-      console.error('Ошибка инициализации Telegram WebApp:', error);
+      console.error("Ошибка инициализации Telegram WebApp:", error);
     }
   }
 
@@ -54,11 +54,9 @@ export class TelegramUserManager {
   }
 
   public getUserName(): string {
-    if (!this.user) return 'Гость';
+    if (!this.user) return "Гость";
 
-    return this.user.first_name ||
-      this.user.username ||
-      `User${this.user.id}`;
+    return this.user.first_name || this.user.username || `User${this.user.id}`;
   }
 
   public getUserAvatar(): string {
@@ -83,7 +81,7 @@ export class TelegramUserManager {
       name,
       avatar,
       id: this.user?.id,
-      hasCustomAvatar: !!(this.user?.photo_url)
+      hasCustomAvatar: !!this.user?.photo_url,
     };
   }
 

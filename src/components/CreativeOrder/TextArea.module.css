@@ -1,0 +1,13 @@
+.textArea:focus-visible {
+  border: none;
+  outline: none;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+
+.textArea {
+  border: none;
+  width: 100%;
+  background-color: transparent;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  color: white;
+}

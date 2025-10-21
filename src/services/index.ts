@@ -1,1 +1,1 @@
-export * from "./TelegramUserManager"
+export * from "./TelegramUserManager";
