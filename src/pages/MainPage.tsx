@@ -8,23 +8,17 @@ const creatives = [
   { group: 1, src: "image1.png" },
   { group: 1, src: "default.png" },
   { group: 1, src: "default.png" },
-  { group: 1, src: "default.png" },
-  { group: 1, src: "default.png" },
   { group: 2, src: "image7.png" },
-  { group: 2, src: "default.png" },
-  { group: 2, src: "default.png" },
   { group: 2, src: "default.png" },
   { group: 2, src: "default.png" },
   { group: 3, src: "image12.png" },
   { group: 3, src: "default.png" },
   { group: 3, src: "default.png" },
-  { group: 3, src: "default.png" },
-  { group: 3, src: "default.png" },
   { group: 4, src: "image16.png" },
   { group: 4, src: "default.png" },
   { group: 4, src: "default.png" },
-  { group: 4, src: "default.png" },
   { group: 5, src: "image20.png" },
+  { group: 5, src: "default.png" },
   { group: 5, src: "default.png" },
 ].reduce((acc, item) => {
   const key = String(item.group);
@@ -42,7 +36,7 @@ const creatives = [
 }, {});
 
 export const MainPage = () => {
-  const { startTime } = useMainContext();
+  const { startTimes } = useMainContext();
   const radius = 80;
   return (
     <>
@@ -59,7 +53,7 @@ export const MainPage = () => {
         }}
       ></Box>
       <CreativeOrder />
-      {startTime && <Progressbar startTime={startTime} />}
+      {startTimes.length && <Progressbar startTimes={startTimes} />}
       {Object.values(creatives).length && (
         <Box display="flex" justifyContent="flex-start" width="100%">
           <Txt>Мои креативы</Txt>

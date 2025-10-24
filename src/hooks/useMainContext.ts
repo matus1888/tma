@@ -6,8 +6,8 @@ interface IMainContext {
   currentGroup?: string[];
   setCurrentGroup: React.Dispatch<React.SetStateAction<string[] | undefined>>;
   setStage: React.Dispatch<React.SetStateAction<StageEnum>>;
-  startTime: number | null;
-  setStartTime: React.Dispatch<React.SetStateAction<number | null>>;
+  startTimes: number[];
+  setStartTimes: React.Dispatch<React.SetStateAction<number[]>>;
 }
 
 const MainContext = createContext<IMainContext | null>(null);

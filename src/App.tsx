@@ -6,15 +6,15 @@ import { Content, Header } from "./features";
 
 export function App() {
   const [stage, setStage] = useState<StageEnum>(StageEnum.MAIN);
-  const [startTime, setStartTime] = useState<number | null>(null);
+  const [startTimes, setStartTimes] = useState<number[]>([]);
   const [currentGroup, setCurrentGroup] = useState<string[] | undefined>();
 
   return (
     <MainContextProvider
       value={{
         stage,
-        setStartTime,
-        startTime,
+        setStartTimes,
+        startTimes,
         setStage,
         currentGroup,
         setCurrentGroup,

@@ -1,10 +1,10 @@
 import { Box, Modal, Stack, TextareaAutosize } from "@mui/material";
 import { useCallback, useState } from "react";
-import styles from "./TextArea.module.css";
-import { useMainContext } from "../../hooks";
 import { AddIcon, CloseIcon } from "../../assets";
-import { Txt } from "../Txt";
+import { useMainContext } from "../../hooks";
 import { Btn } from "../Btn";
+import { Txt } from "../Txt";
+import styles from "./TextArea.module.css";
 
 const style = {
   position: "absolute",
@@ -13,7 +13,7 @@ const style = {
   borderRadius: "16px",
   transform: "translate(-50%, -50%)",
   color: "rgba(255, 255, 255, 0.5)",
-  bgcolor: "rgba(0, 0, 0, 0.5)",
+  bgcolor: "rgba(0, 0, 0, 0.85)",
   border: "1px solid rgba(255, 255, 255, 0.2)",
   boxShadow: 24,
   width: "80%",
@@ -26,7 +26,7 @@ const style = {
 
 export const CreativeOrder = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { setStartTime } = useMainContext();
+  const { setStartTimes } = useMainContext();
   const toggleOpen = useCallback(() => setIsOpen((prev) => !prev), []);
 
   return (
@@ -47,7 +47,15 @@ export const CreativeOrder = () => {
           <Txt>Заказать креатив</Txt>
         </Box>
       </Box>
-      <Modal open={isOpen}>
+      <Modal
+        BackdropProps={{
+          style: {
+            backdropFilter: "blur(3px)",
+            backgroundColor: "transparent",
+          },
+        }}
+        open={isOpen}
+      >
         <Stack sx={style}>
           {/* Header */}
           <Box
@@ -84,14 +92,16 @@ export const CreativeOrder = () => {
           <Box display="flex" justifyContent="center">
             <Btn
               onClick={() => {
-                const element = document.getElementById("task") as unknown as HTMLTextAreaElement | null;
+                const element = document.getElementById(
+                  "task"
+                ) as unknown as HTMLTextAreaElement | null;
                 const value = element?.value;
                 if (value) {
                   console.log(
                     "Здесь вероятно надо отправить данные о новом заказе",
                     value
                   );
-                  setStartTime(Date.now());
+                  setStartTimes((prev) => [...prev, Date.now()]);
                   setIsOpen(false);
                 }
               }}

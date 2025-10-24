@@ -13,19 +13,21 @@ export const Header = () => {
   if (!userInfo) {
     return null;
   }
+  const name = userInfo?.getUserName();
+
   const link = userInfo?.getUserAvatar();
   return (
     <Box display="flex" justifyContent="space-between" paddingBottom="16px" position="sticky">
       <Box display="flex" gap="10px" alignItems="center">
-        <Ava src={link} name={userInfo?.getUserName()} />
-        <Txt color="secondary">Спа&Йога</Txt>
+        <Ava src={link} name={name} />
+        <Txt color="secondary">{name}</Txt>
       </Box>
       <Box display="flex" alignItems="center" gap="22px">
         <InfoIcon />
-        <ChipsContainer>
+        <ChipsContainer onClick={() => setStage(StageEnum.PAYMENT)}>
           <StarsIcon />
           <Txt color="secondary">0</Txt>
-          <AddIcon onClick={() => setStage(StageEnum.PAYMENT)} />
+          <AddIcon />
         </ChipsContainer>
       </Box>
     </Box>

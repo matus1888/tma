@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import LinearProgress, {
   type LinearProgressProps,
 } from "@mui/material/LinearProgress";
-import * as React from "react";
+import React, { useState } from "react";
 import { Txt } from "../Txt";
 import { Stack } from "@mui/material";
 
@@ -17,7 +17,7 @@ function LinearProgressWithLabel(
         </Txt>
         <Txt size="s" color="secondary">{`${Math.round(props.value)}%`}</Txt>
       </Box>
-      <Box sx={{ width: "100%" }}>
+      <Box sx={{ width: "100%", paddingY: "6px" }}>
         <LinearProgress
           variant="determinate"
           sx={{
@@ -39,36 +39,48 @@ function LinearProgressWithLabel(
 
 export function Progressbar({
   timerMin = 15,
-  startTime,
+  startTimes,
 }: {
   timerMin?: number;
-  startTime: number;
+  startTimes: number[];
 }) {
-  const [progress, setProgress] = React.useState(0);
+  const [progresses, setProgresses] = useState(new Array(startTimes.length));
   const totalTime = timerMin * 60 * 1000;
 
   React.useEffect(() => {
     const timer = setInterval(() => {
-      const currentTime = Date.now();
-      const elapsedTime = currentTime - startTime;
-      const newProgress = (elapsedTime / totalTime) * 100;
+      startTimes.forEach((startTime, index) => {
+        const currentTime = Date.now();
+        const elapsedTime = currentTime - startTime;
+        const newProgress = (elapsedTime / totalTime) * 100;
 
-      if (newProgress >= 100) {
-        setProgress(100);
-        clearInterval(timer);
-      } else {
-        setProgress(newProgress);
-      }
+        if (newProgress >= 100) {
+          setProgresses((prev) => {
+            const next = [...prev];
+            next[index] = 100;
+            return next;
+          });
+          clearInterval(timer);
+        } else {
+          setProgresses((prev) => {
+            const next = [...prev];
+            next[index] = newProgress;
+            return next;
+          });
+        }
+      });
     }, 1000);
 
     return () => {
       clearInterval(timer);
     };
-  }, [startTime, totalTime]);
+  }, [startTimes, totalTime]);
 
   return (
     <Box sx={{ width: "100%" }}>
-      <LinearProgressWithLabel value={progress} />
+      {progresses.map((progress) => {
+        return <LinearProgressWithLabel value={progress} />;
+      })}
     </Box>
   );
 }
